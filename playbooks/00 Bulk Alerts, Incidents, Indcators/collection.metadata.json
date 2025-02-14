@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/3\/contexts\/WorkflowCollection",
+    "@type": "WorkflowCollection",
+    "name": "00 Bulk Alerts, Incidents, Indcators",
+    "description": null,
+    "visible": true,
+    "image": null,
+    "uuid": "724f81e7-6f91-480f-b8b9-41341222f732",
+    "deletedAt": null,
+    "recordTags": []
+}

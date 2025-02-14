@@ -1,0 +1,125 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "editableForm",
+                                "config": {
+                                    "wid": "f2272d1a-d784-4cdf-9f67-3055c155046b"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "23b0ab47-fe80-4a45-bd53-d09ca71a7d8d",
+                "_collapsed": false
+            },
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "tabs",
+                                "config": {
+                                    "tabs": [
+                                        {
+                                            "title": "Credit Card",
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "excludes": [
+                                                        "notes",
+                                                        "comments",
+                                                        "userOwners",
+                                                        "attachments"
+                                                    ],
+                                                    "wid": "674a9d0d-a56b-4cb5-b2ad-1201267cc8a7"
+                                                },
+                                                "visible": true
+                                            },
+                                            "show": false,
+                                            "visible": true,
+                                            "icon": "fa fa-th"
+                                        },
+                                        {
+                                            "title": "Flowers",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "sectionHeader",
+                                                "config": {
+                                                    "wid": "4eadd5c2-7bc5-404c-9b4d-ad63c43c284d",
+                                                    "query": {
+                                                        "filters": [],
+                                                        "sort": [],
+                                                        "limit": 10
+                                                    },
+                                                    "editorType": "html",
+                                                    "sectionText": "<p>Hi team,<\/p>\n<p>&nbsp;<\/p>\n<p>Flower Tab: Adding richtextwidget for EMS on 761 Custom SP \"solution-pack-fsr-qa-custom-multi-svt-1\" v2.0.0&nbsp;<\/p>"
+                                                },
+                                                "visible": true
+                                            },
+                                            "icon": "fa fa-cog",
+                                            "show": true,
+                                            "visible": true
+                                        },
+                                        {
+                                            "title": "Lily",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "sectionHeader",
+                                                "config": {
+                                                    "wid": "5032234f-d8e1-426b-b926-3018af9995ab",
+                                                    "query": {
+                                                        "filters": [],
+                                                        "sort": [],
+                                                        "limit": 10
+                                                    },
+                                                    "editorType": "html",
+                                                    "sectionText": "<p>Hi team,<\/p>\n<p>&nbsp;<\/p>\n<p>Lily TAB: Adding richtextwidget for EMS on 761 Custom SP \"solution-pack-fsr-qa-custom-multi-svt-1\" v2.0.0&nbsp;<\/p>"
+                                                }
+                                            },
+                                            "icon": "fa fa-home"
+                                        }
+                                    ],
+                                    "wid": "4a4dd946-4a3e-4b5d-853d-c9b845eb1147"
+                                }
+                            },
+                            {
+                                "type": "sectionHeader",
+                                "config": {
+                                    "wid": "99da23f1-5aee-42e9-81d8-78384d1afbf6",
+                                    "query": {
+                                        "filters": [],
+                                        "sort": [],
+                                        "limit": 10
+                                    },
+                                    "editorType": "html",
+                                    "sectionText": "<p>762 ENV3 Employee T4 again testing<\/p>"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "20fd1e81-b9c1-45d1-ac5e-8666c120a7d6",
+                "_collapsed": false
+            }
+        ],
+        "wid": "6d286d8b-9342-4110-9ff3-aa2b8d72bf7d",
+        "actionButtons": [],
+        "metadata": []
+    },
+    "module": "employee_management_systems",
+    "filters": [],
+    "isDefault": false,
+    "viewOptions": "detail",
+    "name": "EMS-T2-V200",
+    "uuid": "1661394c-5f50-439a-983b-455a7a92bcfd"
+}

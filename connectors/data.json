@@ -1,0 +1,15 @@
+[
+    {
+        "name": "code-snippet",
+        "label": "Code Snippet",
+        "category": [
+            "utilities"
+        ],
+        "description": "Execute code snippets as part of your Playbooks.",
+        "publisher": "Fortinet",
+        "operation_roles": [],
+        "configurations": [],
+        "dataImports": [],
+        "install_mode": "rpm"
+    }
+]

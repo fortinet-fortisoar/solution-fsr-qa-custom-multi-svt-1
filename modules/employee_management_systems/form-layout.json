@@ -1,0 +1,15 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "form",
+    "config": {
+        "rows": []
+    },
+    "module": "employee_management_systems",
+    "filters": [],
+    "isDefault": true,
+    "viewOptions": "form",
+    "name": "Base Template",
+    "uuid": "modules-employee_management_systems-form",
+    "newUuid": "9a36a354-0835-416c-aad0-3c4de169dfd0"
+}

@@ -1,0 +1,219 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Trigger Data Creation",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/724f81e7-6f91-480f-b8b9-41341222f732",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/a237945f-69da-4ea3-8e52-52db6ee98bcf",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Calculate Iterations",
+            "description": null,
+            "arguments": {
+                "loop_list": "[]"
+            },
+            "status": null,
+            "top": "100",
+            "left": "190",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "3f057eb0-7400-4943-82f9-271277f9baed"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Call Child",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.reverse_list}}",
+                    "parallel": true,
+                    "condition": ""
+                },
+                "arguments": {
+                    "time_delta": "{{vars.item}}",
+                    "record_iteration": "{{vars.input.params.recordsPerDay}}",
+                    "current_iteration": ""
+                },
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/441b80f7-c02e-4075-8ebd-8f45e0829040"
+            },
+            "status": null,
+            "top": "360",
+            "left": "960",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "ffaecdf1-117e-4993-9e13-a98d4fc3ebb6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Empty List for iteration",
+            "description": null,
+            "arguments": {
+                "temp": "{% for i in range(0,vars.input.params.span)  %}\n{{vars.loop_list.append(i)}}\n{%endfor%}"
+            },
+            "status": null,
+            "top": "171",
+            "left": "500",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "a867d6ef-ced8-493e-ab3b-6964817ab61a"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Reverse loop list",
+            "description": null,
+            "arguments": {
+                "temp": "{% for i in vars.loop_list | reverse  %}\n{{vars.reverse_list.append(i)}}\n{%endfor%}"
+            },
+            "status": null,
+            "top": "250",
+            "left": "789",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "c509c99d-75a5-483d-8ea5-5b47657d9ec9"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "23cf1a85-b4f0-4f10-8754-97f1571b2a4d",
+                "resources": [
+                    "alerts"
+                ],
+                "inputVariables": [
+                    {
+                        "name": "span",
+                        "type": "integer",
+                        "label": "Span (in Days)",
+                        "title": "Number Field",
+                        "usable": true,
+                        "tooltip": "",
+                        "dataType": "integer",
+                        "formType": "integer",
+                        "required": true,
+                        "_expanded": true,
+                        "collection": false,
+                        "searchable": true,
+                        "templateUrl": "app\/components\/form\/fields\/integer.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "useModuleField": false,
+                        "allowedEncryption": true,
+                        "allowedGridColumn": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "recordsPerDay",
+                        "type": "integer",
+                        "label": "Records per Day",
+                        "title": "Number Field",
+                        "usable": true,
+                        "tooltip": "",
+                        "dataType": "integer",
+                        "formType": "integer",
+                        "required": true,
+                        "_expanded": true,
+                        "collection": false,
+                        "searchable": true,
+                        "templateUrl": "app\/components\/form\/fields\/integer.html",
+                        "defaultValue": null,
+                        "useModuleField": false,
+                        "allowedEncryption": true,
+                        "allowedGridColumn": true,
+                        "useRecordFieldDefault": false
+                    }
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "span": "{{vars.request.data[\"span\"]}}",
+                            "recordsPerDay": "{{vars.request.data[\"recordsPerDay\"]}}"
+                        },
+                        "records": "{{vars.input.records}}"
+                    },
+                    "reverse_list": "[]"
+                },
+                "_promptexpanded": true,
+                "displayConditions": {
+                    "alerts": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "20",
+            "left": "40",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "a237945f-69da-4ea3-8e52-52db6ee98bcf"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Calculate Iterations -> Create Empty List for iteration",
+            "targetStep": "\/api\/3\/workflow_steps\/a867d6ef-ced8-493e-ab3b-6964817ab61a",
+            "sourceStep": "\/api\/3\/workflow_steps\/3f057eb0-7400-4943-82f9-271277f9baed",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "dbcb0651-2732-4d0f-9362-c934fa646c46"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Empty List for iteration -> Reverse loop list",
+            "targetStep": "\/api\/3\/workflow_steps\/c509c99d-75a5-483d-8ea5-5b47657d9ec9",
+            "sourceStep": "\/api\/3\/workflow_steps\/a867d6ef-ced8-493e-ab3b-6964817ab61a",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "4df597d5-7e1a-48ac-a5a7-1f8b012a8427"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Reverse loop list -> Call Child",
+            "targetStep": "\/api\/3\/workflow_steps\/ffaecdf1-117e-4993-9e13-a98d4fc3ebb6",
+            "sourceStep": "\/api\/3\/workflow_steps\/c509c99d-75a5-483d-8ea5-5b47657d9ec9",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e786f7d8-4b23-465a-986e-a4ee220e5aa5"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Calculate Iterations",
+            "targetStep": "\/api\/3\/workflow_steps\/3f057eb0-7400-4943-82f9-271277f9baed",
+            "sourceStep": "\/api\/3\/workflow_steps\/a237945f-69da-4ea3-8e52-52db6ee98bcf",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6b5ccc7d-f2b3-4321-944f-a5d6aabd0b22"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "b65b6c9b-7604-4e6a-906c-8cd9f3b8c5c9",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

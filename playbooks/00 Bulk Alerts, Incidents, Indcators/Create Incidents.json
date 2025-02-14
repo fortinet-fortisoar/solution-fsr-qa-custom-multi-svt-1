@@ -1,0 +1,169 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create Incidents",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "alertIRI",
+        "createdt_format",
+        "assgined_format",
+        "dueby_format"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/724f81e7-6f91-480f-b8b9-41341222f732",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/500f4be8-a5cb-4882-9861-d7c62a1ad651",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configurations",
+            "description": null,
+            "arguments": {
+                "incidentName": "{\n  0: \"Phishing eMail\",\n  1: \"Sensitive Data Breach\",\n  2: \"Security Lock Compromise\",\n  3: \"Suspicious eMail - Subj: Response required\",\n  4: \"Possible Exploitation using Domain gumblar.cn\"\n}",
+                "incidentPhase": "{\n 0: {{ (\"IncidentPhase\" | picklist(\"Detection\")) }},\n 1: {{ (\"IncidentPhase\" | picklist(\"Identification\")) }},\n 2: {{ (\"IncidentPhase\" | picklist(\"Confirmation\")) }},\n 3: {{ (\"IncidentPhase\" | picklist(\"Containment\")) }},\n 4: {{ (\"IncidentPhase\" | picklist(\"Eradication\")) }},\n 5: {{ (\"IncidentPhase\" | picklist(\"Recovery\")) }},\n 6: {{ (\"IncidentPhase\" | picklist(\"Aftermath\")) }}\n}",
+                "incidentStatus": "{\n  0: {{ (\"IncidentStatus\" | picklist(\"Open\")) }},\n  1: {{ (\"IncidentStatus\" | picklist(\"In Progress\")) }},\n  2: {{ (\"IncidentStatus\" | picklist(\"Awaiting\")) }},\n  3: {{ (\"IncidentStatus\" | picklist(\"Resolved\")) }},\n  4: {{ (\"IncidentStatus\" | picklist(\"Inactive\")) }}\n}",
+                "incident_severity": "{\n 0: {{ (\"Severity\" | picklist(\"Critical\")) }},\n 1: {{ (\"Severity\" | picklist(\"High\")) }},\n 2: {{ (\"Severity\" | picklist(\"Medium\")) }},\n 3: {{ (\"Severity\" | picklist(\"Low\")) }},\n 4: {{ (\"Severity\" | picklist(\"Minimal\")) }}\n}",
+                "incident_sourceip": "{\n0: \"201.18.18.173\",\n1: \"20.203.25.58\",\n2: \"220.174.209.154\",\n3: \"58.62.55.130\",\n4: \"114.104.158.172\",\n5: \"61.185.139.72\",\n6: \"219.148.39.134\",\n7: \"91.200.12.91\",\n8: \"61.150.76.201\",\n9: \"222.92.204.50\",\n10: \"60.166.48.158\",\n11: \"60.174.192.240\",\n12: \"221.130.130.238\",\n13: \"61.37.150.6\",\n14: \"218.22.187.66\",\n15: \"22.191.233.238\",\n16: \"218.107.46.228\",\n17: \"183.65.17.118\",\n18: \"46.118.155.165\",\n19: \"118.144.83.130\",\n20: \"115.84.112.138\",\n21: \"222.185.255.227\",\n22: \"61.186.219.33\",\n23: \"58.244.173.130\",\n24: \"58.214.24.53\",\n25: \"221.4.205.30\",\n26: \"222.161.47.82\",\n27: \"218.29.52.2\",\n28: \"58.210.119.226\",\n29: \"115.238.247.228\",\n30: \"37.115.185.236\",\n}",
+                "incident_destinationip": "{\n0: \"192.168.50.21\",\n1: \"192.168.50.22\",\n2: \"192.168.50.23\",\n3: \"192.168.50.24\",\n4: \"192.168.50.25\",\n5: \"192.168.51.20\",\n6: \"192.168.51.21\",\n7: \"192.168.51.22\",\n8: \"192.168.51.23\",\n9: \"192.168.51.24\",\n10: \"192.168.60.25\",\n11: \"192.168.60.22\",\n12: \"192.168.60.22\",\n13: \"192.168.60.23\",\n14: \"192.168.60.24\",\n15: \"192.168.50.25\",\n16: \"192.168.50.26\",\n17: \"192.168.50.27\",\n18: \"192.168.50.28\",\n19: \"192.168.50.29\",\n20: \"192.168.50.30\",\n21: \"192.168.51.22\",\n22: \"192.168.50.23\",\n23: \"192.168.50.24\",\n24: \"192.168.50.25\",\n25: \"192.168.60.40\",\n26: \"192.168.60.41\",\n27: \"192.168.60.42\",\n28: \"192.168.60.43\",\n29: \"192.168.60.44\"\n}"
+            },
+            "status": null,
+            "top": "100",
+            "left": "190",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "c2a9357d-3872-427d-88fa-0604a64595aa"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Incident and Link with Alert",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "{{vars.incidentName[range(0, 5) | random] }}",
+                    "phase": "{{vars.incidentPhase[range(0, 7) | random] }}",
+                    "alerts": "{{vars.input.params.alertIRI}}",
+                    "resSla": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                    "status": "{{vars.incidentStatus[range(0, 4) | random] }}",
+                    "category": "\/api\/3\/picklists\/703218fc-f69a-11e7-8c3f-9a214cf093ae",
+                    "severity": "{{ vars.incident_severity[ range(0, 4) | random ] }}",
+                    "slaState": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                    "sourceIP": "{{vars.incident_sourceip[range(0, 30) | random] }}",
+                    "__replace": "",
+                    "dwellTime": "{{ range(0, 50) | random }}",
+                    "recoveryTime": "{{ range(0, 50) | random }}",
+                    "destinationIP": "{{vars.incident_destinationip[range(0, 29)] }}",
+                    "slaPercentage": 0,
+                    "containmentTime": "{{ range(0, 50) | random }}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/incidents",
+                "__recommend": [],
+                "tagsOperation": "OverwriteTags",
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "174",
+            "left": "380",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "9e231461-ef05-4e3c-97fb-e896b28838f3"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Incident Dates",
+            "description": null,
+            "arguments": {
+                "name": "Code Snippet",
+                "config": "bd853aa2-0b3f-403b-a934-05ec9328eb9e",
+                "params": {
+                    "python_function": "import psycopg2\n\nhostname = '127.0.0.1'\nusername = 'cyberpgsql'\npassword = '6e7c0889c2a76edbd12f93ae200f0715'\ndatabase = 'venom'\n\n\ndef doQuery( conn ) :\n    cur = conn.cursor()\n    try:\n       cur.execute( \"update incidents set createdate='{{vars.input.params['createdt_format']}}'  where id={{vars.steps.Create_Incident_and_Link_with_Alert.id}}\" )\n       conn.commit()\n       cur.execute( \"update incidents set assigneddate='{{vars.input.params['assgined_format']}}'  where id={{vars.steps.Create_Incident_and_Link_with_Alert.id}}\" )\n       conn.commit()\n       cur.execute( \"update incidents set dueby='{{vars.input.params['dueby_format']}}'  where id={{vars.steps.Create_Incident_and_Link_with_Alert.id}}\" )\n       conn.commit()\n    except (Exception, psycopg2.DatabaseError) as error:\n       print(error)\n\n\n \nmyConnection = psycopg2.connect( host=hostname, user=username, password=password, dbname=database )\ndoQuery( myConnection )\nmyConnection.close()"
+                },
+                "version": "2.1.3",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "240",
+            "left": "680",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "32bc627c-5476-4ca5-a228-98a8e44548ff"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "alertIRI": "{{ vars.alertIRI }}",
+                            "dueby_format": "{{ vars.dueby_format }}",
+                            "assgined_format": "{{ vars.assgined_format }}",
+                            "createdt_format": "{{ vars.createdt_format }}"
+                        }
+                    }
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "20",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "500f4be8-a5cb-4882-9861-d7c62a1ad651"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configurations -> Create Incident and Link with Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/9e231461-ef05-4e3c-97fb-e896b28838f3",
+            "sourceStep": "\/api\/3\/workflow_steps\/c2a9357d-3872-427d-88fa-0604a64595aa",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "728894ae-3762-47e3-a377-d8dfcdeea05b"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Incident and Link with Alert -> Set Incident Dates",
+            "targetStep": "\/api\/3\/workflow_steps\/32bc627c-5476-4ca5-a228-98a8e44548ff",
+            "sourceStep": "\/api\/3\/workflow_steps\/9e231461-ef05-4e3c-97fb-e896b28838f3",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "35287d9f-b43b-4d1e-bd9d-d65f76b2d57a"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Create Incident and link to Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/c2a9357d-3872-427d-88fa-0604a64595aa",
+            "sourceStep": "\/api\/3\/workflow_steps\/500f4be8-a5cb-4882-9861-d7c62a1ad651",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "00648c25-24ac-424d-b3b7-dbf296d259f4"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "210bcd49-b7bd-4b98-a158-2f80084cbf1c",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

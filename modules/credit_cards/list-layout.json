@@ -1,0 +1,28 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "grid",
+                                "config": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "module": "credit_cards",
+    "filters": [],
+    "isDefault": true,
+    "viewOptions": "list",
+    "name": "Base Template",
+    "uuid": "modules-credit_cards-list",
+    "newUuid": "d4ec151a-434e-4a22-b4fa-f4228ae2f845"
+}

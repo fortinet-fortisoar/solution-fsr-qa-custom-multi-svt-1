@@ -1,0 +1,290 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create Alerts",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "createDateTimeStamp"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/724f81e7-6f91-480f-b8b9-41341222f732",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/5556ab77-efcb-4d52-a419-10d7d19228ec",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configurations",
+            "description": null,
+            "arguments": {
+                "alertName": "{\n 0: \"Repeated Login Failures on 192.168.50.21 (External, Safe)\",\n 1: \"Malware Detected on WIN-EP2\",\n 2: \"WIN-EP2 - XmlWinEventLog:Microsoft-Windows-Sysmon\/Operational\",\n 3: \"OutBound Connection - PaloAlto Network Traffic Alert\",\n 4: \"Suspicious Email: Urgent: Requesting CEO Level Demo Environment\",\n 5: \"Checkpoint Test Port Scan Alarm\"\n}",
+                "alertType": "{\n 0: {{ (\"AlertType\" | picklist(\"Beaconing\")) }},\n 1: {{ (\"AlertType\" | picklist(\"Denial of Service\")) }},\n 2: {{ (\"AlertType\" | picklist(\"Brute Force Attempts\")) }},\n 3: {{ (\"AlertType\" | picklist(\"Data Exfiltration\")) }},\n 4: {{ (\"Severity\" | picklist(\"Lost \/ Stolen\")) }},\n5: {{ (\"AlertType\" | picklist(\"Lateral Movement\")) }},\n6: {{ (\"AlertType\" | picklist(\"Malware\")) }},\n7: {{ (\"AlertType\" | picklist(\"Phishing\")) }},\n8: {{ (\"AlertType\" | picklist(\"Policy Violation\")) }},\n9: {{ (\"AlertType\" | picklist(\"Ransomware\")) }},\n10: {{ (\"AlertType\" | picklist(\"Other \/ Unknown\")) }},\n11: {{ (\"AlertType\" | picklist(\"Data Leakage\")) }}\n}",
+                "alertSource": "{\n  0: \"McAfee ESM\",\n  1: \"Splunk\",\n  2: \"QRadar\",\n  3: \"BMCRemedy\",\n  4: \"ArcSight\",\n  5: \"User Reported\"\n}",
+                "alertStatus": "{\n 0: {{ (\"AlertStatus\" | picklist(\"Open\")) }},\n 1: {{ (\"AlertStatus\" | picklist(\"Investigating\")) }},\n 2: {{ (\"AlertStatus\" | picklist(\"Closed\")) }},\n 3: {{ (\"AlertStatus\" | picklist(\"Closed (Duplicate)\")) }},\n 4: {{ (\"AlertStatus\" | picklist(\"Closed (False Positive)\")) }},\n5: {{ (\"AlertStatus\" | picklist(\"Re-Opened\")) }}\n}",
+                "dueby_format": "{{arrow.get(vars.input.params.createDateTimeStamp).shift(days=+5).format('YYYY-MM-DD HH:mm:ss')}}",
+                "alertSeverity": "{\n 0: {{ (\"Severity\" | picklist(\"Critical\")) }},\n 1: {{ (\"Severity\" | picklist(\"High\")) }},\n 2: {{ (\"Severity\" | picklist(\"Medium\")) }},\n 3: {{ (\"Severity\" | picklist(\"Low\")) }},\n 4: {{ (\"Severity\" | picklist(\"Minimal\")) }}\n}",
+                "alertSourceID": "{\n  0: \"a126\",\n  1: \"b456\",\n  2: \"c098\",\n  3: \"f085\",\n  4: \"t689\",\n  5: \"y809\"\n}",
+                "alert_sourceip": "{\n0: \"201.18.18.173\",\n1: \"20.203.25.58\",\n2: \"220.174.209.154\",\n3: \"58.62.55.130\",\n4: \"114.104.158.172\",\n5: \"61.185.139.72\",\n6: \"219.148.39.134\",\n7: \"91.200.12.91\",\n8: \"61.150.76.201\",\n9: \"222.92.204.50\",\n10: \"60.166.48.158\",\n11: \"60.174.192.240\",\n12: \"221.130.130.238\",\n13: \"61.37.150.6\",\n14: \"218.22.187.66\",\n15: \"22.191.233.238\",\n16: \"218.107.46.228\",\n17: \"183.65.17.118\",\n18: \"46.118.155.165\",\n19: \"118.144.83.130\",\n20: \"115.84.112.138\",\n21: \"222.185.255.227\",\n22: \"61.186.219.33\",\n23: \"58.244.173.130\",\n24: \"58.214.24.53\",\n25: \"221.4.205.30\",\n26: \"222.161.47.82\",\n27: \"218.29.52.2\",\n28: \"58.210.119.226\",\n29: \"115.238.247.228\",\n30: \"37.115.185.236\",\n}",
+                "assigned_format": "{{arrow.get(vars.input.params.createDateTimeStamp).shift(days=+1).format('YYYY-MM-DD HH:mm:ss')}}",
+                "createdt_format": "{{arrow.get(vars.input.params.createDateTimeStamp).format('YYYY-MM-DD HH:mm:ss')}}",
+                "alert_Destinationip": "{\n0: \"192.168.50.21\",\n1: \"192.168.50.22\",\n2: \"192.168.50.23\",\n3: \"192.168.50.24\",\n4: \"192.168.50.25\",\n5: \"192.168.51.20\",\n6: \"192.168.51.21\",\n7: \"192.168.51.22\",\n8: \"192.168.51.23\",\n9: \"192.168.51.24\",\n10: \"192.168.60.25\",\n11: \"192.168.60.22\",\n12: \"192.168.60.22\",\n13: \"192.168.60.23\",\n14: \"192.168.60.24\",\n15: \"192.168.50.25\",\n16: \"192.168.50.26\",\n17: \"192.168.50.27\",\n18: \"192.168.50.28\",\n19: \"192.168.50.29\",\n20: \"192.168.50.30\",\n21: \"192.168.51.22\",\n22: \"192.168.50.23\",\n23: \"192.168.50.24\",\n24: \"192.168.50.25\",\n25: \"192.168.60.40\",\n26: \"192.168.60.41\",\n27: \"192.168.60.42\",\n28: \"192.168.60.43\",\n29: \"192.168.60.44\"\n}"
+            },
+            "status": null,
+            "top": "100",
+            "left": "340",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "62950ff4-d671-4302-93cd-185cebb107a8"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Alert",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "{{vars.alertName[ range(0,5) | random]}}",
+                    "type": "{{vars.alertType[ range(0,11) | random]}}",
+                    "source": "{{vars.alertSource[ range(0,5) | random]}}",
+                    "status": "{{vars.alertStatus[ range(0,5) | random]}}",
+                    "severity": "{{vars.alertSeverity[ range(0,4) | random]}}",
+                    "__replace": "",
+                    "ackSlaStatus": {
+                        "id": 7,
+                        "@id": "\/api\/3\/picklists\/090115d7-90fc-4dc6-97ca-27950fc30c1c",
+                        "icon": null,
+                        "uuid": "090115d7-90fc-4dc6-97ca-27950fc30c1c",
+                        "@type": "Picklist",
+                        "color": "#14b341",
+                        "display": "Met",
+                        "@context": "\/api\/3\/contexts\/Picklist",
+                        "listName": "\/api\/3\/picklist_names\/fe36a8f2-fcba-4221-b4ab-1081f596b153",
+                        "itemValue": "Met",
+                        "orderIndex": 0
+                    },
+                    "assigneddate": "{{vars.input.params.createDateTimeStamp}}",
+                    "closureReason": {
+                        "id": 250,
+                        "@id": "\/api\/3\/picklists\/8590c81e-3307-4645-97f5-c3e1bec4e05a",
+                        "icon": null,
+                        "uuid": "8590c81e-3307-4645-97f5-c3e1bec4e05a",
+                        "@type": "Picklist",
+                        "color": null,
+                        "display": "Tasks Completed",
+                        "@context": "\/api\/3\/contexts\/Picklist",
+                        "listName": "\/api\/3\/picklist_names\/4ebacea1-88cd-4ea8-9dcc-385bea42cc59",
+                        "itemValue": "Tasks Completed",
+                        "orderIndex": 0
+                    },
+                    "respSlaStatus": {
+                        "id": 7,
+                        "@id": "\/api\/3\/picklists\/090115d7-90fc-4dc6-97ca-27950fc30c1c",
+                        "icon": null,
+                        "uuid": "090115d7-90fc-4dc6-97ca-27950fc30c1c",
+                        "@type": "Picklist",
+                        "color": "#14b341",
+                        "display": "Met",
+                        "@context": "\/api\/3\/contexts\/Picklist",
+                        "listName": "\/api\/3\/picklist_names\/fe36a8f2-fcba-4221-b4ab-1081f596b153",
+                        "itemValue": "Met",
+                        "orderIndex": 0
+                    }
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/alerts",
+                "__recommend": [],
+                "tagsOperation": "OverwriteTags",
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "200",
+            "left": "680",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "5627ba5f-bbf6-4fa9-ac1c-59800a92ed2c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Incident for Alert",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "alertIRI": "{{vars.steps.Create_Alert['@id']}}",
+                    "dueby_format": "{{vars.dueby_format}}",
+                    "assgined_format": "{{vars.assigned_format}}",
+                    "createdt_format": "{{vars.createdt_format}}"
+                },
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/210bcd49-b7bd-4b98-a158-2f80084cbf1c"
+            },
+            "status": null,
+            "top": "380",
+            "left": "1360",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "ad1daf7b-d868-483b-9e55-1acfeab0f381"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Indicators are Link to Alert",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "alertIRI": "{{vars.steps.Create_Alert['@id']}}",
+                    "createdt_format": "{{vars.createdt_format}}"
+                },
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/7bf68b38-b359-4715-88d6-6c690356357e"
+            },
+            "status": null,
+            "top": "480",
+            "left": "1040",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "966b8185-6f73-44bc-ac83-06ef6fb54feb"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Task and Link to Alert",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "alertIRI": "{{vars.steps.Create_Alert['@id']}}",
+                    "dueby_format": "{{vars.dueby_format}}",
+                    "startdt_format": "{{vars.assigned_format}}",
+                    "createdt_format": "{{vars.createdt_format}}"
+                },
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/76072fbd-63a3-4a3e-9189-e86b8fae6412"
+            },
+            "status": null,
+            "top": "580",
+            "left": "720",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "2819d390-9edf-4bb4-9b75-b5aa109dd296"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set  Dates",
+            "description": null,
+            "arguments": {
+                "name": "Code Snippet",
+                "config": "b5195722-9917-4e6e-ac0f-cddab46620ee",
+                "params": {
+                    "python_function": "import psycopg2\n\nhostname = '127.0.0.1'\nusername = 'cyberpgsql'\npassword = 'a8effae7b8634380d4bd008abac7a602'\ndatabase = 'venom'\n\n\ndef doQuery( conn ) :\n    cur = conn.cursor()\n    try:\n       cur.execute( \"update alerts set createdate='{{vars.createdt_format}}'  where id={{vars.steps.Create_Alert.id}}\" )\n       conn.commit()\n       cur.execute( \"update alerts set assigneddate='{{vars.assigned_format}}'  where id={{vars.steps.Create_Alert.id}}\" )\n       conn.commit()\n       cur.execute( \"update alerts set dueby='{{vars.dueby_format}}'  where id={{vars.steps.Create_Alert.id}}\" )\n       conn.commit()\n    except (Exception, psycopg2.DatabaseError) as error:\n       print(error)\n\n\n \nmyConnection = psycopg2.connect( host=hostname, user=username, password=password, dbname=database )\ndoQuery( myConnection )\nmyConnection.close()"
+                },
+                "version": "2.1.3",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "280",
+            "left": "1020",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "26ba422f-34a5-4623-844b-dd8efef877d2"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "createDateTimeStamp": "{{ vars.createDateTimeStamp }}"
+                        }
+                    }
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "40",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "5556ab77-efcb-4d52-a419-10d7d19228ec"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configurations -> Create Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/5627ba5f-bbf6-4fa9-ac1c-59800a92ed2c",
+            "sourceStep": "\/api\/3\/workflow_steps\/62950ff4-d671-4302-93cd-185cebb107a8",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "2334c52a-a860-4092-80fc-1598c9ca9c6e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Alert -> Set  Dates",
+            "targetStep": "\/api\/3\/workflow_steps\/26ba422f-34a5-4623-844b-dd8efef877d2",
+            "sourceStep": "\/api\/3\/workflow_steps\/5627ba5f-bbf6-4fa9-ac1c-59800a92ed2c",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e2c6e187-71f5-4151-b00d-264e248ef90d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Incident for Alert -> Create Indicators are Link to Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/966b8185-6f73-44bc-ac83-06ef6fb54feb",
+            "sourceStep": "\/api\/3\/workflow_steps\/ad1daf7b-d868-483b-9e55-1acfeab0f381",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "38c11adf-bf32-48b2-be3f-6ff2e7847b33"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Indicators are Link to Alert -> Create Task and Link to Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/2819d390-9edf-4bb4-9b75-b5aa109dd296",
+            "sourceStep": "\/api\/3\/workflow_steps\/966b8185-6f73-44bc-ac83-06ef6fb54feb",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "29af3d54-66ae-4754-973d-f1ec15472c33"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Set  Dates -> Create Incident for Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/ad1daf7b-d868-483b-9e55-1acfeab0f381",
+            "sourceStep": "\/api\/3\/workflow_steps\/26ba422f-34a5-4623-844b-dd8efef877d2",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "a162c48e-d1d0-41d4-86ee-47195b1d0b60"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configurations",
+            "targetStep": "\/api\/3\/workflow_steps\/62950ff4-d671-4302-93cd-185cebb107a8",
+            "sourceStep": "\/api\/3\/workflow_steps\/5556ab77-efcb-4d52-a419-10d7d19228ec",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "3d008667-52ba-422e-8715-bd8adc04acca"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "b316755a-a737-4bc1-8671-de5809591a1d",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

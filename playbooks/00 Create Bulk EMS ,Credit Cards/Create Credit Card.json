@@ -1,0 +1,154 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create Credit Card",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "createDateTimeStamp"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/1b2ef862-7105-4847-a06a-ed15e86773a6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/2af840ac-66d2-4913-ad15-3d49ae696b8d",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configurations",
+            "description": null,
+            "arguments": {
+                "custName": "{\n 0: \"Aarav Sharma\",\n 1: \"Ishita Patel\",\n 2: \"Rohan Iyer\",\n 3: \"Sneha Nair\",\n 4: \"Vivaan Mehta\",\n 5: \"Ananya Reddy\",\n 6: \"Kabir Choudhury\",\n 7: \"Diya Menon\",\n 8: \"Arjun Malhotra\",\n 9: \"Tanya Joshi\",\n 10: \"Vedant Kapoor\",\n 11: \"Pooja Rao\",\n 12: \"Rahul Saxena\",\n 13: \"Simran Bhatt\",\n 14: \"Aditya Verma\",\n 15: \"Meera Kulkarni\",\n 16: \"Karan Agrawal\",\n 17: \"Sanya Mishra\",\n 18: \"Neel Sengupta\",\n 19: \"Priya Banerjee\",\n 20: \"Shubhanki Jaiswal\",\n 21: \"Harshita Jaiswal\",\n 22: \"Renu Jai\",\n 23: \"Ayushi Jai\"\n}",
+                "chooseBank": "{\n 0: {{ (\"Bank Name\" | picklist(\"hdfc\")) }},\n 1: {{ (\"Bank Name\" | picklist(\"pnb\")) }},\n 2: {{ (\"Bank Name\" | picklist(\"icici\")) }},\n 3: {{ (\"Bank Name\" | picklist(\"citybank\")) }},\n 4. {{ (\"Bank Name\" | picklist(\"sbi\")) }}\n}",
+                "createdt_format": "{{arrow.get(vars.input.params.createDateTimeStamp).format('YYYY-MM-DD HH:mm:ss')}}"
+            },
+            "status": null,
+            "top": "100",
+            "left": "340",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "13d17df3-de80-493f-b617-8c5794093ca2"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Credit Card Records",
+            "description": null,
+            "arguments": {
+                "config": "e88c3166-6083-4cf5-9983-ef7ff23020f3",
+                "version": "2.1.3",
+                "resource": {
+                    "__replace": "",
+                    "selectBank": "{{vars.chooseBank[ range(0,5) | random]}}",
+                    "customerName": "{{vars.custName[ range(0,19) | random]}}",
+                    "accountNumber": "{{ range(100000,200000) | random }}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/credit_cards",
+                "__recommend": [],
+                "tagsOperation": "OverwriteTags",
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "200",
+            "left": "680",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "0c7b3d73-1a81-475c-acea-ca79fb7f70db"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set  Dates",
+            "description": null,
+            "arguments": {
+                "name": "Code Snippet",
+                "config": "b5195722-9917-4e6e-ac0f-cddab46620ee",
+                "params": {
+                    "python_function": "import psycopg2\n\nhostname = '127.0.0.1'\nusername = 'cyberpgsql'\npassword = 'a8effae7b8634380d4bd008abac7a602'\ndatabase = 'venom'\n\n\ndef doQuery( conn ) :\n    cur = conn.cursor()\n    try:\n       cur.execute( \"update employee_management_systems set createdate='{{vars.createdt_format}}'  where id={{vars.steps.Create_Credit_Card_Records.id}}\" )\n       conn.commit()\n    except (Exception, psycopg2.DatabaseError) as error:\n       print(error)\n\n\n \nmyConnection = psycopg2.connect( host=hostname, user=username, password=password, dbname=database )\ndoQuery( myConnection )\nmyConnection.close()"
+                },
+                "version": "2.1.3",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "280",
+            "left": "1020",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "8dc4b3e5-4850-431a-9527-f8354683e58c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "createDateTimeStamp": "{{ vars.createDateTimeStamp }}"
+                        }
+                    }
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "40",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "2af840ac-66d2-4913-ad15-3d49ae696b8d"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configurations -> Create Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/0c7b3d73-1a81-475c-acea-ca79fb7f70db",
+            "sourceStep": "\/api\/3\/workflow_steps\/13d17df3-de80-493f-b617-8c5794093ca2",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "d10218ad-36bf-42bb-9516-ec1d5956d68a"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Alert -> Set  Dates",
+            "targetStep": "\/api\/3\/workflow_steps\/8dc4b3e5-4850-431a-9527-f8354683e58c",
+            "sourceStep": "\/api\/3\/workflow_steps\/0c7b3d73-1a81-475c-acea-ca79fb7f70db",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e8f16d63-2166-47f8-ae7f-826cd9ffcc78"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configurations",
+            "targetStep": "\/api\/3\/workflow_steps\/13d17df3-de80-493f-b617-8c5794093ca2",
+            "sourceStep": "\/api\/3\/workflow_steps\/2af840ac-66d2-4913-ad15-3d49ae696b8d",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "9a5f84d9-bc36-46ff-81e9-04a7498ea47d"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "dc4e872c-483b-445a-97e3-49da46c63aa3",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "incomplete",
+        "todo"
+    ]
+}

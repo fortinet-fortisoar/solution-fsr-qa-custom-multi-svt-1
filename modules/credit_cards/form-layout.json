@@ -1,0 +1,15 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "form",
+    "config": {
+        "rows": []
+    },
+    "module": "credit_cards",
+    "filters": [],
+    "isDefault": true,
+    "viewOptions": "form",
+    "name": "Base Template",
+    "uuid": "modules-credit_cards-form",
+    "newUuid": "71da23a2-82fe-4579-9be1-441638827273"
+}

@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/3\/contexts\/WorkflowCollection",
+    "@type": "WorkflowCollection",
+    "name": "00 Create Bulk EMS ,Credit Cards",
+    "description": null,
+    "visible": true,
+    "image": null,
+    "uuid": "1b2ef862-7105-4847-a06a-ed15e86773a6",
+    "deletedAt": null,
+    "recordTags": []
+}

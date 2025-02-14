@@ -1,0 +1,152 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create EMS",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "createDateTimeStamp"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/1b2ef862-7105-4847-a06a-ed15e86773a6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/782f9850-1ad2-4e2d-8282-301c9a6b72fc",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configurations",
+            "description": null,
+            "arguments": {
+                "emsName": "{\n 0: \"Ariana Patel\",\n 1: \"Liam Carter\",\n 2: \"Sophia Nguyen\",\n 3: \"Daniel Thompson\",\n 4: \"Eva Martinez\",\n 5: \"Haruto Tanaka\",\n 6: \"Noah Williams\",\n 7: \"Isla Robinson\",\n 8: \"Mateo Hernandez\",\n 9: \"Zoe Chen\",\n 10: \"Elijah Singh\",\n 11: \"Mia Russo\",\n 12: \"Oliver Johnson\",\n 13: \"Hana Kim\",\n 14: \"Rafael Almeida\",\n 15: \"Emily Clark\",\n 16: \"Leo Dasgupta\",\n 17: \"Nina Volkov\",\n 18: \"Samuel Wright\",\n 19: \"Jasmine Hassan\"\n}",
+                "createdt_format": "{{arrow.get(vars.input.params.createDateTimeStamp).format('YYYY-MM-DD HH:mm:ss')}}",
+                "favColorPicklist": "{\n 0: {{ (\"Fav Color\" | picklist(\"Red\")) }},\n 1: {{ (\"Fav Color\" | picklist(\"yellow\")) }},\n 2: {{ (\"Fav Color\" | picklist(\"green\")) }},\n 3: {{ (\"Fav Color\" | picklist(\"violet\")) }}\n}"
+            },
+            "status": null,
+            "top": "100",
+            "left": "340",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "dfb95f1d-6c8b-4d8f-800b-b17281883fbc"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create EMS",
+            "description": null,
+            "arguments": {
+                "config": "e88c3166-6083-4cf5-9983-ef7ff23020f3",
+                "version": "2.1.3",
+                "resource": {
+                    "contact": "{{ range(71231, 91231) | random }}",
+                    "__replace": "",
+                    "employeeName": "{{vars.emsName[ range(0,19) | random]}}",
+                    "favoriteColor": "{{vars.favColorPicklist[ range(0,4) | random]}}",
+                    "employeeSalary": "{{ range(10000,20000) | random }}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/employee_management_systems",
+                "__recommend": [],
+                "tagsOperation": "OverwriteTags",
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "200",
+            "left": "680",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "0059e44e-75d7-4c48-8f93-d6ce1958c18b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set  Dates",
+            "description": null,
+            "arguments": {
+                "name": "Code Snippet",
+                "config": "b5195722-9917-4e6e-ac0f-cddab46620ee",
+                "params": {
+                    "python_function": "import psycopg2\n\nhostname = '127.0.0.1'\nusername = 'cyberpgsql'\npassword = 'a8effae7b8634380d4bd008abac7a602'\ndatabase = 'venom'\n\n\ndef doQuery( conn ) :\n    cur = conn.cursor()\n    try:\n       cur.execute( \"update employee_management_systems set createdate='{{vars.createdt_format}}'  where id={{vars.steps.Create_EMS.id}}\" )\n       conn.commit()\n    except (Exception, psycopg2.DatabaseError) as error:\n       print(error)\n\n\n \nmyConnection = psycopg2.connect( host=hostname, user=username, password=password, dbname=database )\ndoQuery( myConnection )\nmyConnection.close()"
+                },
+                "version": "2.1.3",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "280",
+            "left": "1020",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "ebb8cc6a-8552-4309-bddf-899ccbd72470"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "createDateTimeStamp": "{{ vars.createDateTimeStamp }}"
+                        }
+                    }
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "40",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "782f9850-1ad2-4e2d-8282-301c9a6b72fc"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configurations -> Create Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/0059e44e-75d7-4c48-8f93-d6ce1958c18b",
+            "sourceStep": "\/api\/3\/workflow_steps\/dfb95f1d-6c8b-4d8f-800b-b17281883fbc",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6ea70a57-2207-433a-bbad-8c90ce6bf14d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Alert -> Set  Dates",
+            "targetStep": "\/api\/3\/workflow_steps\/ebb8cc6a-8552-4309-bddf-899ccbd72470",
+            "sourceStep": "\/api\/3\/workflow_steps\/0059e44e-75d7-4c48-8f93-d6ce1958c18b",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "beccf982-5a3c-47e2-b0cd-c6f8a54310c9"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configurations",
+            "targetStep": "\/api\/3\/workflow_steps\/dfb95f1d-6c8b-4d8f-800b-b17281883fbc",
+            "sourceStep": "\/api\/3\/workflow_steps\/782f9850-1ad2-4e2d-8282-301c9a6b72fc",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "17a1bbce-7f00-4123-8eb1-342a2984781d"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "505c28dd-fe82-40ff-a853-44d61940a524",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

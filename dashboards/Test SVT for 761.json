@@ -1,0 +1,106 @@
+{
+    "@context": "\/api\/3\/contexts\/Dashboard",
+    "@type": "Dashboard",
+    "uuid": "1e468d85-1ecc-42bf-99c4-f737db209de6",
+    "displayName": "Test SVT for 761",
+    "type": "rows",
+    "templateType": "dashboard",
+    "roles": [],
+    "parentTemplateId": null,
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "chart",
+                                "config": {
+                                    "wid": "c965913f-8134-4140-bfcd-8dbf95856135",
+                                    "widgetAlwaysDisplay": true,
+                                    "showTabularData": false,
+                                    "query": {
+                                        "sort": [
+                                            {
+                                                "field": "favoriteColor.orderIndex",
+                                                "direction": "ASC"
+                                            }
+                                        ],
+                                        "limit": 2147483647,
+                                        "logic": "AND",
+                                        "filters": [],
+                                        "aggregates": [
+                                            {
+                                                "operator": "countdistinct",
+                                                "field": "*",
+                                                "alias": "total"
+                                            },
+                                            {
+                                                "operator": "groupby",
+                                                "alias": "favoriteColor",
+                                                "field": "favoriteColor.itemValue"
+                                            },
+                                            {
+                                                "operator": "groupby",
+                                                "alias": "color",
+                                                "field": "favoriteColor.color"
+                                            },
+                                            {
+                                                "operator": "groupby",
+                                                "alias": "orderIndex",
+                                                "field": "favoriteColor.orderIndex"
+                                            }
+                                        ]
+                                    },
+                                    "mapping": {
+                                        "fieldName": "favoriteColor"
+                                    },
+                                    "assignedToSetting": "onlyMe",
+                                    "aggregate": true,
+                                    "resource": "employee_management_systems",
+                                    "chart": "pie",
+                                    "title": "EMS  Dashboard for Fav Color for SVT Test in 7.6.1"
+                                }
+                            },
+                            {
+                                "type": "grid",
+                                "config": {
+                                    "wid": "5f6c2203-6453-487a-8b86-c31ccd0e3f00",
+                                    "module": "credit_cards",
+                                    "columns": [
+                                        "accountNumber",
+                                        "customerName",
+                                        "selectBank",
+                                        "id",
+                                        "createDate"
+                                    ],
+                                    "expandableCol": [],
+                                    "relationshipField": [],
+                                    "checkboxStatus": false,
+                                    "editableFields": false,
+                                    "actionButtons": [],
+                                    "query": {
+                                        "sort": [],
+                                        "limit": 30,
+                                        "logic": "AND",
+                                        "filters": []
+                                    },
+                                    "title": "Grid widget used for Credit Card Dashboard for SVT TEST in 7.6.1"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "79a42723-75fd-46a5-83b8-14e4fcf2323f",
+                "_collapsed": false
+            }
+        ],
+        "wid": "0cb02c2d-a936-4fc5-956e-e4a3d8fe3b0a",
+        "metadata": {
+            "customTemplateTitle": "COMPONENTS.BREADCRUMB.DASHBOARD"
+        }
+    },
+    "filterArray": [],
+    "updateDate": null
+}

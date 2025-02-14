@@ -1,0 +1,17 @@
+{
+    "EMPLOYEE_MANAGEMENT_SYSTEMS": {
+        "MODULE_DETAILS": {
+            "SINGULAR_NAME": "Employee Management System",
+            "PLURAL_NAME": "Employee Management Systems"
+        },
+        "FIELDS": {
+            "EMPLOYEEDUMMYFIELDTEST": "761 Employee Dummy Field test",
+            "FAVORITECOLOR": "Favorite  Color",
+            "EMPLOYEESALARY": "Employee Salary",
+            "CONTACT": "Contact",
+            "EMPLOYEENAME": "Employee Name",
+            "CREDITCARD": "Credit Card",
+            "ENV3EMPLOYEEDUMMYFIELDTEST": "762 Env3 Employee Dummy Field Test"
+        }
+    }
+}

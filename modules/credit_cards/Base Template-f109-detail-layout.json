@@ -1,0 +1,86 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "editableForm",
+                                "config": {
+                                    "wid": "e8d49790-cd30-4d7a-bf8a-05d5006b0a2f"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "ba030675-ba6e-4c9c-ad95-da1ffb83e67d",
+                "_collapsed": false
+            },
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "tabs",
+                                "config": {
+                                    "tabs": [
+                                        {
+                                            "title": "Related Records",
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "excludes": [
+                                                        "notes",
+                                                        "comments",
+                                                        "userOwners",
+                                                        "attachments"
+                                                    ],
+                                                    "wid": "d3100190-cbdf-47af-b664-f7ff29983944"
+                                                },
+                                                "visible": true
+                                            },
+                                            "show": true,
+                                            "visible": true,
+                                            "icon": "fa fa-none"
+                                        }
+                                    ],
+                                    "wid": "2bc2ec3b-ad05-4793-b23d-42716b08a3d4"
+                                }
+                            },
+                            {
+                                "type": "sectionHeader",
+                                "config": {
+                                    "wid": "5b795116-9ee4-471d-a9c0-155e15695ac8",
+                                    "query": {
+                                        "filters": [],
+                                        "sort": [],
+                                        "limit": 10
+                                    },
+                                    "editorType": "html",
+                                    "sectionText": "<p>Adding richtextwidget for credit card on 761 Custom SP \"solution-pack-fsr-qa-custom-multi-svt-1\" v2.0.0<\/p>"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "4b863944-2722-4c2a-b151-3b974d26df9b",
+                "_collapsed": false
+            }
+        ],
+        "wid": "69f07d48-515b-49de-94f1-2c1cedc6a6b4",
+        "actionButtons": [],
+        "metadata": []
+    },
+    "module": "credit_cards",
+    "filters": [],
+    "isDefault": false,
+    "viewOptions": "detail",
+    "name": "Base Template",
+    "uuid": "7a2f92da-f109-4867-ba35-1800fa9bcc9a"
+}

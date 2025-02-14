@@ -1,0 +1,50 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/472a2591-e397-4c75-a631-b9d57580476c",
+    "@type": "PicklistName",
+    "name": "Fav Color",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/ddc0138f-39ca-4868-b8e3-c4bbd7b0f296",
+            "@type": "Picklist",
+            "itemValue": "Red",
+            "orderIndex": 0,
+            "color": "#e15f5f",
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/472a2591-e397-4c75-a631-b9d57580476c",
+            "uuid": "ddc0138f-39ca-4868-b8e3-c4bbd7b0f296"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/e30b8e9c-a35a-4f36-aba8-faf3a8fd807f",
+            "@type": "Picklist",
+            "itemValue": "yellow",
+            "orderIndex": 1,
+            "color": "#d7eb6a",
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/472a2591-e397-4c75-a631-b9d57580476c",
+            "uuid": "e30b8e9c-a35a-4f36-aba8-faf3a8fd807f"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/6960ef54-7f6a-418a-b04e-ae78cdeead41",
+            "@type": "Picklist",
+            "itemValue": "green",
+            "orderIndex": 2,
+            "color": "#65e1a8",
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/472a2591-e397-4c75-a631-b9d57580476c",
+            "uuid": "6960ef54-7f6a-418a-b04e-ae78cdeead41"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/7200ffe5-b768-4d4d-8ca7-10058ad1affd",
+            "@type": "Picklist",
+            "itemValue": "violet",
+            "orderIndex": 3,
+            "color": "#d281eb",
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/472a2591-e397-4c75-a631-b9d57580476c",
+            "uuid": "7200ffe5-b768-4d4d-8ca7-10058ad1affd"
+        }
+    ],
+    "uuid": "472a2591-e397-4c75-a631-b9d57580476c"
+}

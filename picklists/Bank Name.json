@@ -1,0 +1,60 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/717a9b64-4c5b-43fe-ab5e-b05280efb943",
+    "@type": "PicklistName",
+    "name": "Bank Name",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/0a70fd84-83a1-4258-9a1c-2c71469d73b2",
+            "@type": "Picklist",
+            "itemValue": "hdfc",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/717a9b64-4c5b-43fe-ab5e-b05280efb943",
+            "uuid": "0a70fd84-83a1-4258-9a1c-2c71469d73b2"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/0af768f5-3ee4-47d1-977b-02afe16fe6ea",
+            "@type": "Picklist",
+            "itemValue": "pnb",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/717a9b64-4c5b-43fe-ab5e-b05280efb943",
+            "uuid": "0af768f5-3ee4-47d1-977b-02afe16fe6ea"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/3d9b573f-b366-4ded-bc63-b128db6c10c7",
+            "@type": "Picklist",
+            "itemValue": "sbi",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/717a9b64-4c5b-43fe-ab5e-b05280efb943",
+            "uuid": "3d9b573f-b366-4ded-bc63-b128db6c10c7"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/6bd74870-a3ea-4b9b-a91e-6d4cb81d0bd3",
+            "@type": "Picklist",
+            "itemValue": "icici",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/717a9b64-4c5b-43fe-ab5e-b05280efb943",
+            "uuid": "6bd74870-a3ea-4b9b-a91e-6d4cb81d0bd3"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/200d2906-4446-41c8-ab36-36e02b2abb34",
+            "@type": "Picklist",
+            "itemValue": "citybank",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/717a9b64-4c5b-43fe-ab5e-b05280efb943",
+            "uuid": "200d2906-4446-41c8-ab36-36e02b2abb34"
+        }
+    ],
+    "uuid": "717a9b64-4c5b-43fe-ab5e-b05280efb943"
+}

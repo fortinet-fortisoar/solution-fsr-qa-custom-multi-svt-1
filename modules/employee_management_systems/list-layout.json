@@ -1,0 +1,28 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "grid",
+                                "config": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "module": "employee_management_systems",
+    "filters": [],
+    "isDefault": true,
+    "viewOptions": "list",
+    "name": "Base Template",
+    "uuid": "modules-employee_management_systems-list",
+    "newUuid": "f72fe343-a05c-4359-96e2-795138f72694"
+}

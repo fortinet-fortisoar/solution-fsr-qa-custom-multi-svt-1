@@ -1,0 +1,172 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create Tasks",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "alertIRI",
+        "createdt_format",
+        "dueby_format",
+        "startdt_format"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/724f81e7-6f91-480f-b8b9-41341222f732",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/38107955-52f3-4b2a-aa1b-e48a874e30e3",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configurations",
+            "description": null,
+            "arguments": {
+                "taskName": "{\n 0: \"Assign Investigation Tasks\",\n 1: \"Lloyds Test Ticket\",\n 2: \"Block IP Address\",\n 3: \"Submit samples of Sophos\/Microsoft\/McAfee\"\n}",
+                "taskType": "{\n 0: {{ (\"TaskType\" | picklist(\"Approval\")) }},\n 1: {{ (\"TaskType\" | picklist(\"Email\")) }},\n 2:  {{ (\"TaskType\" | picklist(\"Incident Response\")) }}\n}",
+                "taskStatus": "{\n 0: {{ (\"TaskStatus\" | picklist(\"Assigned\")) }},\n 1: {{ (\"TaskStatus\" | picklist(\"Accepted\")) }},\n 2: {{ (\"TaskStatus\" | picklist(\"On Hold\")) }},\n 3: {{ (\"TaskStatus\" | picklist(\"Skipped\")) }},\n4: {{ (\"TaskStatus\" | picklist(\"Skipped\")) }}\n}",
+                "taskPriority": "{\n 0: {{ (\"TaskPriority\" | picklist(\"Urgent\")) }},\n 1: {{ (\"TaskPriority\" | picklist(\"High\")) }},\n 2: {{ (\"TaskPriority\" | picklist(\"Medium\")) }},\n 3: {{ (\"TaskPriority\" | picklist(\"Low\")) }}\n}"
+            },
+            "status": null,
+            "top": "100",
+            "left": "180",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "c36b6b98-d928-47e7-ac26-0909ca21670b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Task and Link with Alert",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "{{vars.taskName[range(0,3) | random] }}",
+                    "type": "{{vars.taskType[range(0,2) | random] }}",
+                    "dueBy": null,
+                    "notes": null,
+                    "alerts": "['{{vars.input.params.alertIRI}}']",
+                    "assets": null,
+                    "owners": null,
+                    "status": "{{vars.taskStatus[range(0,4) | random] }}",
+                    "persons": null,
+                    "comments": null,
+                    "priority": "{{vars.taskPriority[range(0,3) | random] }}",
+                    "taskdata": null,
+                    "tasktype": null,
+                    "companies": null,
+                    "incidents": null,
+                    "startDate": null,
+                    "workflowid": null,
+                    "attachments": null,
+                    "description": null,
+                    "approvalhost": null,
+                    "actualMinutes": null,
+                    "assignedOnDate": null,
+                    "completedOnDate": null,
+                    "vulnerabilities": null,
+                    "assignedToPerson": null,
+                    "systemAssignedQueue": null
+                },
+                "_showJson": false,
+                "collection": "\/api\/3\/tasks",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "170",
+            "left": "372",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "5964a42e-0fbf-42ad-b8b5-c03feecd5a65"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Tasks Dates",
+            "description": null,
+            "arguments": {
+                "name": "Code Snippet",
+                "config": "bd853aa2-0b3f-403b-a934-05ec9328eb9e",
+                "params": {
+                    "python_function": "import psycopg2\n\nhostname = '127.0.0.1'\nusername = 'cyberpgsql'\npassword = '6e7c0889c2a76edbd12f93ae200f0715'\ndatabase = 'venom'\n\n\ndef doQuery( conn ) :\n    cur = conn.cursor()\n    try:\n       cur.execute( \"update tasks set createdate='{{vars.input.params['createdt_format']}}'  where id={{vars.steps.Create_Task_and_Link_with_Alert.id}}\" )\n       conn.commit()\n       cur.execute( \"update tasks set startdate='{{vars.input.params['startdt_format']}}'  where id={{vars.steps.Create_Task_and_Link_with_Alert.id}}\" )\n       conn.commit()\n       cur.execute( \"update tasks set dueby='{{vars.input.params['dueby_format']}}'  where id={{vars.steps.Create_Task_and_Link_with_Alert.id}}\" )\n       conn.commit()\n    except (Exception, psycopg2.DatabaseError) as error:\n       print(error)\n\n\n \nmyConnection = psycopg2.connect( host=hostname, user=username, password=password, dbname=database )\ndoQuery( myConnection )\nmyConnection.close()"
+                },
+                "version": "2.1.3",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "235",
+            "left": "707",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "bf1d4785-9eda-47af-aa9d-719fcbef73d6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "alertIRI": "{{ vars.alertIRI }}",
+                            "dueby_format": "{{ vars.dueby_format }}",
+                            "startdt_format": "{{ vars.startdt_format }}",
+                            "createdt_format": "{{ vars.createdt_format }}"
+                        }
+                    }
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "20",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "38107955-52f3-4b2a-aa1b-e48a874e30e3"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configurations -> Create Incident and Link with Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/5964a42e-0fbf-42ad-b8b5-c03feecd5a65",
+            "sourceStep": "\/api\/3\/workflow_steps\/c36b6b98-d928-47e7-ac26-0909ca21670b",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "ac768d3f-4747-447f-917d-a4e9d3d2c3fc"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Task and Link with Alert -> Set Tasks Dates",
+            "targetStep": "\/api\/3\/workflow_steps\/bf1d4785-9eda-47af-aa9d-719fcbef73d6",
+            "sourceStep": "\/api\/3\/workflow_steps\/5964a42e-0fbf-42ad-b8b5-c03feecd5a65",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f8110479-ea6f-46cb-872d-49765fd8238d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Create Incident and link to Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/c36b6b98-d928-47e7-ac26-0909ca21670b",
+            "sourceStep": "\/api\/3\/workflow_steps\/38107955-52f3-4b2a-aa1b-e48a874e30e3",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f1a26382-e1e3-40fe-b492-0826a1e8ee88"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "76072fbd-63a3-4a3e-9189-e86b8fae6412",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

@@ -1,0 +1,95 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "editableForm",
+                                "config": {
+                                    "wid": "e8d49790-cd30-4d7a-bf8a-05d5006b0a2f"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "ba030675-ba6e-4c9c-ad95-da1ffb83e67d",
+                "_collapsed": false
+            },
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "tabs",
+                                "config": {
+                                    "tabs": [
+                                        {
+                                            "title": "Related Records",
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "excludes": [
+                                                        "notes",
+                                                        "comments",
+                                                        "userOwners",
+                                                        "attachments"
+                                                    ],
+                                                    "wid": "d3100190-cbdf-47af-b664-f7ff29983944"
+                                                },
+                                                "visible": true
+                                            },
+                                            "show": true,
+                                            "visible": true,
+                                            "icon": "fa fa-none"
+                                        },
+                                        {
+                                            "title": "Credit Card Custom Tab3",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "sectionHeader",
+                                                "config": {
+                                                    "wid": "13674b19-70a2-4b74-970d-19c6d09f3e5a",
+                                                    "query": {
+                                                        "filters": [],
+                                                        "sort": [],
+                                                        "limit": 10
+                                                    },
+                                                    "editorType": "html",
+                                                    "sectionText": "<p>Hi team,<\/p>\n<p>&nbsp;<\/p>\n<p>Credit card Tab3 coming from custom SP v300<\/p>"
+                                                },
+                                                "visible": true
+                                            },
+                                            "icon": "fa fa-th-large",
+                                            "show": true,
+                                            "visible": true
+                                        }
+                                    ],
+                                    "wid": "2bc2ec3b-ad05-4793-b23d-42716b08a3d4"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "4b863944-2722-4c2a-b151-3b974d26df9b",
+                "_collapsed": false
+            }
+        ],
+        "wid": "69f07d48-515b-49de-94f1-2c1cedc6a6b4",
+        "actionButtons": [],
+        "metadata": []
+    },
+    "module": "credit_cards",
+    "filters": [],
+    "isDefault": true,
+    "viewOptions": "detail",
+    "name": "CC-T3-V300",
+    "uuid": "modules-credit_cards-detail",
+    "newUuid": "002929c0-4d6c-4e69-a281-69381b5b62df"
+}

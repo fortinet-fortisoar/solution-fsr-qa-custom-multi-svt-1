@@ -1,0 +1,210 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create Task Test Data",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": false,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/724f81e7-6f91-480f-b8b9-41341222f732",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/44713df3-ef51-43c8-9acf-4f9619ee5b52",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Tasks",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Task for Analyst  - {{range(1001,10001) | random}}",
+                    "type": "{{vars.PickTypeValues[0].picklists[vars.randomType]['@id']}}",
+                    "dueBy": "{{arrow.utcnow().replace(days=+vars.randomDate).timestamp}}",
+                    "notes": null,
+                    "alerts": null,
+                    "assets": null,
+                    "owners": null,
+                    "status": "{{vars.PickStatusValues[0].picklists[vars.randomStatus]['@id']}}",
+                    "persons": null,
+                    "comments": null,
+                    "priority": "{{vars.pickPriValues[0].picklists[vars.randomPic]['@id']}}",
+                    "taskdata": "",
+                    "tasktype": null,
+                    "companies": null,
+                    "incidents": null,
+                    "startDate": "{{arrow.utcnow().replace(days=+vars.randomDate).timestamp}}",
+                    "workflowid": "{{range(98989,2312424) | random}}",
+                    "attachments": null,
+                    "description": "<p>Lorem ipsum elit mi consectetur vivamus nisl accumsan ad, justo platea malesuada nisl sollicitudin fermentum integer justo fringilla, lobortis metus non ipsum augue sem posuere proin at luctus arcu.<\/p>\n<p>Arcu et velit vel at senectus aliquam morbi hendrerit rhoncus, viverra vestibulum himenaeos placerat aliquam ultricies placerat ante donec, accumsan vestibulum class elit enim iaculis convallis felis a iaculis tempus primis auctor commodo eu urna feugiat commodo platea mauris.<\/p>\n<p>Himenaeos sit suscipit sem pretium lacus turpis vestibulum, dictumst est faucibus cubilia ultrices luctus, tellus at habitant nec et orci.<\/p>\n<p>Tellus faucibus mauris conubia tempus donec urna etiam at leo platea, tempor cursus amet blandit rutrum viverra ante dictumst porttitor sodales dapibus, et tellus nunc rutrum inceptos ipsum non mauris ultrices tincidunt laoreet sollicitudin fermentum senectus ante eu ipsum suscipit mollis massa dolor pulvinar.<\/p>\n<p>Torquent ante mollis proin sapien id dapibus aliquam adipiscing, egestas vulputate torquent vel litora libero sollicitudin lacinia, ornare orci eros mauris suscipit congue dolor sollicitudin mauris tincidunt elit orci nec cubilia, pellentesque sodales nulla sociosqu aliquet, facilisis lacinia integer habitant ullamcorper.<\/p>",
+                    "approvalhost": null,
+                    "actualMinutes": null,
+                    "assignedOnDate": "{{arrow.utcnow().replace(days=-vars.randomDate).timestamp}}",
+                    "completedOnDate": null,
+                    "vulnerabilities": null,
+                    "assignedToPerson": null,
+                    "systemAssignedQueue": null
+                },
+                "_showJson": false,
+                "collection": "\/api\/3\/tasks",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "174",
+            "left": "600",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "4a27f205-a509-4433-9661-749dc49830cc"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "resource": "tasks",
+                "resources": [
+                    "tasks"
+                ],
+                "step_variables": {
+                    "input": {
+                        "records": [
+                            "{{vars.request.data}}"
+                        ]
+                    },
+                    "randomPic": "{{range(0,4) | random }}",
+                    "randomType": "{{range(0,9) | random }}",
+                    "randomStatus": "{{range(0,3) | random }}"
+                },
+                "fieldbasedtrigger": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "20",
+            "stepType": "\/api\/3\/workflow_step_types\/ea155646-3821-4542-9702-b246da430a8d",
+            "group": null,
+            "uuid": "44713df3-ef51-43c8-9acf-4f9619ee5b52"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Task Support IRI",
+            "description": null,
+            "arguments": {
+                "newDate": "{{arrow.utcnow().replace(days=-vars.delta).format('YYYY-MM-DD HH:mm:ss')}}",
+                "randomDate": "{{range(5,20)| random}}",
+                "pickPriValues": "{{\"TaskPriority\" | picklist}}",
+                "PickTypeValues": "{{\"TaskType\" | picklist}}",
+                "PickStatusValues": "{{\"TaskStatus\" | picklist}}"
+            },
+            "status": null,
+            "top": "100",
+            "left": "310",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "71041efd-0fd8-46a7-8095-d9fac87c8739"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update create date",
+            "description": null,
+            "arguments": {
+                "name": "Code Snippet",
+                "config": "91805ea7-9cc0-4821-bda6-8bb9ab8dba4d",
+                "params": {
+                    "python_function": "import psycopg2\n\nhostname = '127.0.0.1'\nusername = 'cyberpgsql'\npassword = '6e7c0889c2a76edbd12f93ae200f0715'\ndatabase = 'venom'\n\"newDt='{{vars.newDate}}'\"\n\"Aid='{{vars.input.records[0].id}}'\"\n\n\n\ndef doQuery( conn ) :\n    cur = conn.cursor()\n    try:\n       cur.execute( \"update tasks set createdate='{{vars.newDate}}'  where id={{vars.steps.Create_Tasks.id}}\" )\n       conn.commit()\n       #cur.execute( \"Select *  from alerts  where id={{vars.input.records[0].id}}\" )\n       #print(cur.fetchall())\n    except (Exception, psycopg2.DatabaseError) as error:\n       print(error)\n\n\n \nmyConnection = psycopg2.connect( host=hostname, user=username, password=password, dbname=database )\ndoQuery( myConnection )\nmyConnection.close()"
+                },
+                "version": "2.1.3",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "240",
+            "left": "900",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "f99654be-88c7-4343-a049-e62d2870a07a"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Macro",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "macro": "MyVar",
+                    "value": "{{vars.delta +1}}"
+                },
+                "version": "2.3.0",
+                "connector": "cyops_utilities",
+                "operation": "updatemacro",
+                "operationTitle": "CyOPs: Update Macro",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "306",
+            "left": "1200",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "group": null,
+            "uuid": "327e374e-60ce-4b04-8ed7-688d349edd93"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Tasks -> Update create date",
+            "targetStep": "\/api\/3\/workflow_steps\/f99654be-88c7-4343-a049-e62d2870a07a",
+            "sourceStep": "\/api\/3\/workflow_steps\/4a27f205-a509-4433-9661-749dc49830cc",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e705e3ea-ad19-4cae-a748-67778b8ae39c"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Task Support IRI",
+            "targetStep": "\/api\/3\/workflow_steps\/71041efd-0fd8-46a7-8095-d9fac87c8739",
+            "sourceStep": "\/api\/3\/workflow_steps\/44713df3-ef51-43c8-9acf-4f9619ee5b52",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "97055b20-b9e6-49e1-bd0f-4f7fd0980df6"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Task Support IRI -> Create Tasks",
+            "targetStep": "\/api\/3\/workflow_steps\/4a27f205-a509-4433-9661-749dc49830cc",
+            "sourceStep": "\/api\/3\/workflow_steps\/71041efd-0fd8-46a7-8095-d9fac87c8739",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "cf1e1ee1-ca91-40f2-91b7-25bbc8c8ad2d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update create date -> Update Macro",
+            "targetStep": "\/api\/3\/workflow_steps\/327e374e-60ce-4b04-8ed7-688d349edd93",
+            "sourceStep": "\/api\/3\/workflow_steps\/f99654be-88c7-4343-a049-e62d2870a07a",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "5c031e38-baac-4e48-913f-bff9106219b9"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "9cd2e6c8-31d7-4ff9-a7dc-6045b19cc7e5",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

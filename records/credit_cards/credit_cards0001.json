@@ -1,0 +1,92 @@
+[
+    {
+        "@type": "CreditCard",
+        "accountNumber": 100957,
+        "customerName": "Arjun Malhotra",
+        "selectBank": "\/api\/3\/picklists\/0a70fd84-83a1-4258-9a1c-2c71469d73b2",
+        "employeeManagementSystems": [
+            "\/api\/3\/employee_management_systems\/69b07084-9a06-4123-b43b-2ba7ca592638"
+        ],
+        "uuid": "6397af48-0ac6-470d-814e-ca5133185046",
+        "createUser": "\/api\/3\/appliances\/57545210-2adc-472b-a24f-2df6ee8dfe63",
+        "createDate": 1738929548.470791,
+        "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "modifyDate": 1738929591.163032,
+        "recordTags": []
+    },
+    {
+        "@type": "CreditCard",
+        "accountNumber": 108435,
+        "customerName": "Vedant Kapoor",
+        "selectBank": "\/api\/3\/picklists\/0af768f5-3ee4-47d1-977b-02afe16fe6ea",
+        "employeeManagementSystems": [
+            "\/api\/3\/employee_management_systems\/69b07084-9a06-4123-b43b-2ba7ca592638"
+        ],
+        "uuid": "a3db179d-0f5e-4321-a45a-4fc129d81a5b",
+        "createUser": "\/api\/3\/appliances\/57545210-2adc-472b-a24f-2df6ee8dfe63",
+        "createDate": 1738929547.873379,
+        "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "modifyDate": 1738929603.279427,
+        "recordTags": []
+    },
+    {
+        "@type": "CreditCard",
+        "accountNumber": 179035,
+        "customerName": "Rohan Iyer",
+        "selectBank": "\/api\/3\/picklists\/6bd74870-a3ea-4b9b-a91e-6d4cb81d0bd3",
+        "employeeManagementSystems": [
+            "\/api\/3\/employee_management_systems\/69b07084-9a06-4123-b43b-2ba7ca592638"
+        ],
+        "uuid": "c019ae82-bf3e-4b03-adff-a72d1e5f04d1",
+        "createUser": "\/api\/3\/appliances\/57545210-2adc-472b-a24f-2df6ee8dfe63",
+        "createDate": 1738929548.395127,
+        "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "modifyDate": 1738929620.374081,
+        "recordTags": []
+    },
+    {
+        "@type": "CreditCard",
+        "accountNumber": 187575,
+        "customerName": "Rohan Iyer",
+        "selectBank": "\/api\/3\/picklists\/200d2906-4446-41c8-ab36-36e02b2abb34",
+        "employeeManagementSystems": [
+            "\/api\/3\/employee_management_systems\/69b07084-9a06-4123-b43b-2ba7ca592638"
+        ],
+        "uuid": "c2141c4c-eff4-4e19-a360-a08523b1631c",
+        "createUser": "\/api\/3\/appliances\/57545210-2adc-472b-a24f-2df6ee8dfe63",
+        "createDate": 1738929551.460344,
+        "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "modifyDate": 1738929581.436544,
+        "recordTags": []
+    },
+    {
+        "@type": "CreditCard",
+        "accountNumber": 144249,
+        "customerName": "Rohan Iyer",
+        "selectBank": "\/api\/3\/picklists\/3d9b573f-b366-4ded-bc63-b128db6c10c7",
+        "employeeManagementSystems": [
+            "\/api\/3\/employee_management_systems\/69b07084-9a06-4123-b43b-2ba7ca592638"
+        ],
+        "uuid": "d24b259d-eed8-49d8-9d17-3ce8b79a5838",
+        "createUser": "\/api\/3\/appliances\/57545210-2adc-472b-a24f-2df6ee8dfe63",
+        "createDate": 1738929548.128929,
+        "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "modifyDate": 1738929609.149679,
+        "recordTags": []
+    },
+    {
+        "@type": "CreditCard",
+        "accountNumber": 182445,
+        "customerName": "Ananya Reddy",
+        "selectBank": "\/api\/3\/picklists\/6bd74870-a3ea-4b9b-a91e-6d4cb81d0bd3",
+        "employeeManagementSystems": [
+            "\/api\/3\/employee_management_systems\/69b07084-9a06-4123-b43b-2ba7ca592638"
+        ],
+        "uuid": "f37feba2-5d5a-4692-b9b1-2df3fc9bf98b",
+        "createUser": "\/api\/3\/appliances\/57545210-2adc-472b-a24f-2df6ee8dfe63",
+        "createDate": 1738929548.300184,
+        "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "modifyDate": 1738929629.889338,
+        "recordTags": []
+    }
+]

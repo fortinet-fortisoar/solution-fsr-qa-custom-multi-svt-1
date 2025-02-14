@@ -1,0 +1,196 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "ChildPB",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "record_iteration",
+        "time_delta"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/1b2ef862-7105-4847-a06a-ed15e86773a6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/7c4200a2-354d-4a7a-b5f8-48e39371f750",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Copy of Create Related Records",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.loop_list_inner}}",
+                    "parallel": true,
+                    "condition": ""
+                },
+                "arguments": {
+                    "createDateTimeStamp": "{{vars.createdt}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": false,
+                "workflowReference": "\/api\/3\/workflows\/dc4e872c-483b-445a-97e3-49da46c63aa3"
+            },
+            "status": null,
+            "top": "160",
+            "left": "900",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "4482d1d3-2595-4666-8e8b-b4529ec6147b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Empty List for iteration",
+            "description": null,
+            "arguments": {
+                "temp": "{%for i in range(vars.input.params['record_iteration'] | int)  %}\n{{vars.loop_list_inner.append(\"value\")}}\n{%endfor%}"
+            },
+            "status": null,
+            "top": "300",
+            "left": "560",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "7755ad28-0657-42d3-b2df-a542ad2d2247"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Related Records",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.loop_list_inner}}",
+                    "parallel": true,
+                    "condition": ""
+                },
+                "arguments": {
+                    "createDateTimeStamp": "{{vars.createdt}}"
+                },
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/505c28dd-fe82-40ff-a853-44d61940a524"
+            },
+            "status": null,
+            "top": "420",
+            "left": "880",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "09bb4d81-ff07-47c6-8b24-b262a8751c70"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Delta",
+            "description": null,
+            "arguments": {
+                "delta": "{{vars.input.params['time_delta']}}"
+            },
+            "status": null,
+            "top": "100",
+            "left": "220",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "08c3d796-fcd5-4618-a538-39bd71f5531d"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "SetRecordCreateDate",
+            "description": null,
+            "arguments": {
+                "createdt": "{{arrow.utcnow().shift(days=-vars.input.params['time_delta']).timestamp}}"
+            },
+            "status": null,
+            "top": "200",
+            "left": "400",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "68895214-e790-4c7a-9f79-c9decdc9b342"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "time_delta": "{{ vars.time_delta }}",
+                            "record_iteration": "{{ vars.record_iteration }}"
+                        }
+                    },
+                    "loop_list_inner": "[]"
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "20",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "7c4200a2-354d-4a7a-b5f8-48e39371f750"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Empty List for iteration -> Copy of Create Related Records",
+            "targetStep": "\/api\/3\/workflow_steps\/4482d1d3-2595-4666-8e8b-b4529ec6147b",
+            "sourceStep": "\/api\/3\/workflow_steps\/7755ad28-0657-42d3-b2df-a542ad2d2247",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "be746715-d35f-4f6c-95da-7613fdb44501"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Empty List for iteration -> Create Related Records",
+            "targetStep": "\/api\/3\/workflow_steps\/09bb4d81-ff07-47c6-8b24-b262a8751c70",
+            "sourceStep": "\/api\/3\/workflow_steps\/7755ad28-0657-42d3-b2df-a542ad2d2247",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "29918d61-f2da-4973-87e9-d9f6a831f651"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Set Delta -> SetRecordCreateDate",
+            "targetStep": "\/api\/3\/workflow_steps\/68895214-e790-4c7a-9f79-c9decdc9b342",
+            "sourceStep": "\/api\/3\/workflow_steps\/08c3d796-fcd5-4618-a538-39bd71f5531d",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "9c242152-a362-4479-9824-8147ae8a3869"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "SetRecordCreateDate -> Create Empty List for iteration",
+            "targetStep": "\/api\/3\/workflow_steps\/7755ad28-0657-42d3-b2df-a542ad2d2247",
+            "sourceStep": "\/api\/3\/workflow_steps\/68895214-e790-4c7a-9f79-c9decdc9b342",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "a0003a7e-b8cf-40cb-90c2-239de1a43026"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Set Delta",
+            "targetStep": "\/api\/3\/workflow_steps\/08c3d796-fcd5-4618-a538-39bd71f5531d",
+            "sourceStep": "\/api\/3\/workflow_steps\/7c4200a2-354d-4a7a-b5f8-48e39371f750",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "73b60881-7f52-4ae7-88bc-e142b7b4b2f9"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "22d42138-27b6-4f51-97fc-10ebb8354c78",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

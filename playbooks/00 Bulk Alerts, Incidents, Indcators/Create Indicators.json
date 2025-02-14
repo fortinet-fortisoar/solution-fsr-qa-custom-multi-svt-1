@@ -1,0 +1,160 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create Indicators",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "alertIRI",
+        "createdt_format"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/724f81e7-6f91-480f-b8b9-41341222f732",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/fbf45259-1a35-4d04-b302-c444bdfc731e",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configurations",
+            "description": null,
+            "arguments": {
+                "indicatorData": "{\n 0: \"[ '{{ (\"IndicatorType\" | picklist(\"Domain\")) }}', '{{vars.domains[range(0,2) | random] }}' ]\",\n 1: \"[ '{{ (\"IndicatorType\" | picklist(\"IP Address\")) }}', '{{vars.ips[range(0,4) | random] }}']\",\n 2: \"[ '{{ (\"IndicatorType\" | picklist(\"URL\")) }}','{{vars.urls[range(0,2) | random] }}' ]\"  \n}"
+            },
+            "status": null,
+            "top": "100",
+            "left": "189",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "e6e6cb64-eb6a-416c-af1c-22500720773f"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Indicator and Link with Alert",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "tags": null,
+                    "notes": null,
+                    "value": "{{vars.indicatorData[0][1]}}",
+                    "alerts": "['{{vars.input.params.alertIRI}}']",
+                    "assets": null,
+                    "emails": null,
+                    "events": null,
+                    "owners": null,
+                    "persons": null,
+                    "sources": null,
+                    "comments": null,
+                    "companies": null,
+                    "incidents": null,
+                    "reputation": null,
+                    "attachments": null,
+                    "description": null,
+                    "typeofindicator": null,
+                    "vulnerabilities": null
+                },
+                "_showJson": false,
+                "collection": "\/api\/3\/indicators",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "173",
+            "left": "374",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "0037daef-78d7-4b6c-86eb-a140701d0894"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Indicator Dates",
+            "description": null,
+            "arguments": {
+                "name": "Code Snippet",
+                "config": "bd853aa2-0b3f-403b-a934-05ec9328eb9e",
+                "params": {
+                    "python_function": "import psycopg2\n\nhostname = '127.0.0.1'\nusername = 'cyberpgsql'\npassword = '6e7c0889c2a76edbd12f93ae200f0715'\ndatabase = 'venom'\n\n\ndef doQuery( conn ) :\n    cur = conn.cursor()\n    try:\n       cur.execute( \"update indicators set createdate='{{vars.input.params['createdt_format']}}'  where id={{vars.steps.Create_Indicator_and_Link_with_Alert.id}}\" )\n       conn.commit()\n    except (Exception, psycopg2.DatabaseError) as error:\n       print(error)\n\n\n \nmyConnection = psycopg2.connect( host=hostname, user=username, password=password, dbname=database )\ndoQuery( myConnection )\nmyConnection.close()"
+                },
+                "version": "2.1.3",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "244",
+            "left": "673",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "74c3f46e-324b-4763-b3b7-ccf78718bfd0"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "ips": "{\n0: \"218.22.100.42\",\n1: \"37.115.185.236\",\n2: \"188.138.9.49\",\n3: \"91.207.7.54\",\n4: \"112.24.103.242\"\n}",
+                    "urls": "{\n0: \"abc.com\",\n1: \"example.com\",\n2: \"xyz.com\"\n}",
+                    "input": {
+                        "params": {
+                            "alertIRI": "{{ vars.alertIRI }}",
+                            "createdt_format": "{{ vars.createdt_format }}"
+                        }
+                    },
+                    "domains": "{\n0: \"ucsb.edu\",\n1: \"neu.edu\",\n2: \"eurecom.fr\"\n}"
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "20",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "fbf45259-1a35-4d04-b302-c444bdfc731e"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configurations -> Create Incident and Link with Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/0037daef-78d7-4b6c-86eb-a140701d0894",
+            "sourceStep": "\/api\/3\/workflow_steps\/e6e6cb64-eb6a-416c-af1c-22500720773f",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "52dec473-b7a3-44b1-bacb-3b5f547469c4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Indicator and Link with Alert -> Set Indicator Dates",
+            "targetStep": "\/api\/3\/workflow_steps\/74c3f46e-324b-4763-b3b7-ccf78718bfd0",
+            "sourceStep": "\/api\/3\/workflow_steps\/0037daef-78d7-4b6c-86eb-a140701d0894",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f09d2d63-c78a-48c3-9581-f32a5c3d1147"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Create Incident and link to Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/e6e6cb64-eb6a-416c-af1c-22500720773f",
+            "sourceStep": "\/api\/3\/workflow_steps\/fbf45259-1a35-4d04-b302-c444bdfc731e",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "45c315cf-b343-4f51-91fa-e9b708008ae2"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "7bf68b38-b359-4715-88d6-6c690356357e",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

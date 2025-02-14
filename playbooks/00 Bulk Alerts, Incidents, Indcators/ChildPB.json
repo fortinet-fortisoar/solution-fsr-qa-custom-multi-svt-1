@@ -1,0 +1,160 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "ChildPB",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "record_iteration",
+        "time_delta"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/724f81e7-6f91-480f-b8b9-41341222f732",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/b94712b9-df58-4cce-895f-32b2d0184114",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Empty List for iteration",
+            "description": null,
+            "arguments": {
+                "temp": "{%for i in range(vars.input.params['record_iteration'] | int)  %}\n{{vars.loop_list_inner.append(\"value\")}}\n{%endfor%}"
+            },
+            "status": null,
+            "top": "300",
+            "left": "560",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "6491d8b7-4fdc-47df-b301-c2d226eb4b9e"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Related Records",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.loop_list_inner}}",
+                    "parallel": true,
+                    "condition": ""
+                },
+                "arguments": {
+                    "createDateTimeStamp": "{{vars.createdt}}"
+                },
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/b316755a-a737-4bc1-8671-de5809591a1d"
+            },
+            "status": null,
+            "top": "420",
+            "left": "714",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "8cf5c68a-f970-4568-8402-57e0dd399266"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Delta",
+            "description": null,
+            "arguments": {
+                "delta": "{{vars.input.params['time_delta']}}"
+            },
+            "status": null,
+            "top": "100",
+            "left": "220",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "4fae25a1-0700-4cc3-80f5-73c28bf4f347"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "SetRecordCreateDate",
+            "description": null,
+            "arguments": {
+                "createdt": "{{arrow.utcnow().shift(days=-vars.input.params['time_delta']).timestamp}}"
+            },
+            "status": null,
+            "top": "200",
+            "left": "400",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "f6de1684-0edf-46ee-9230-6c63144b6f07"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "time_delta": "{{ vars.time_delta }}",
+                            "record_iteration": "{{ vars.record_iteration }}"
+                        }
+                    },
+                    "loop_list_inner": "[]"
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "20",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "b94712b9-df58-4cce-895f-32b2d0184114"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Empty List for iteration -> Create Related Records",
+            "targetStep": "\/api\/3\/workflow_steps\/8cf5c68a-f970-4568-8402-57e0dd399266",
+            "sourceStep": "\/api\/3\/workflow_steps\/6491d8b7-4fdc-47df-b301-c2d226eb4b9e",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "153474ad-c8aa-4add-90ec-8718b5afc31f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Set Delta -> SetRecordCreateDate",
+            "targetStep": "\/api\/3\/workflow_steps\/f6de1684-0edf-46ee-9230-6c63144b6f07",
+            "sourceStep": "\/api\/3\/workflow_steps\/4fae25a1-0700-4cc3-80f5-73c28bf4f347",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "72842b3e-188b-42ad-9d18-a79dc7d40b53"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "SetRecordCreateDate -> Create Empty List for iteration",
+            "targetStep": "\/api\/3\/workflow_steps\/6491d8b7-4fdc-47df-b301-c2d226eb4b9e",
+            "sourceStep": "\/api\/3\/workflow_steps\/f6de1684-0edf-46ee-9230-6c63144b6f07",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "49f6c3eb-ac36-49ee-a973-529150c27b57"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Set Delta",
+            "targetStep": "\/api\/3\/workflow_steps\/4fae25a1-0700-4cc3-80f5-73c28bf4f347",
+            "sourceStep": "\/api\/3\/workflow_steps\/b94712b9-df58-4cce-895f-32b2d0184114",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6e7d5f71-fd58-4958-8e94-f22ebc0b73a8"
+        }
+    ],
+    "groups": [],
+    "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
+    "uuid": "441b80f7-c02e-4075-8ebd-8f45e0829040",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

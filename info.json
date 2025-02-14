@@ -1,0 +1,117 @@
+{
+    "name": "solution-pack-fsr-qa-custom-multi-svt-1",
+    "version": "3.0.0",
+    "fsrMinCompatibility": "7.2.0",
+    "type": "solutionpack",
+    "local": true,
+    "label": "solution-pack-fsr-qa-custom-multi-svt-1",
+    "dependencies": [],
+    "prerequisite": null,
+    "publisher": "Community",
+    "description": "",
+    "help": null,
+    "category": [],
+    "supportInfo": null,
+    "iconLarge": null,
+    "postInstallConfig": null,
+    "date": "2025-02-14T05:00:42+00:00",
+    "contents": {
+        "picklistNames": [
+            {
+                "name": "Bank Name"
+            },
+            {
+                "name": "Fav Color"
+            }
+        ],
+        "modules": {
+            "alerts": {
+                "name": "Alerts",
+                "apiName": "alerts"
+            },
+            "credit_cards": {
+                "name": "Credit Cards",
+                "apiName": "credit_cards"
+            },
+            "employee_management_systems": {
+                "name": "Employee Management Systems",
+                "apiName": "employee_management_systems"
+            }
+        },
+        "viewTemplates": {
+            "alerts": {
+                "name": "Alerts",
+                "apiName": "alerts",
+                "views": [
+                    "detail",
+                    "list",
+                    "form"
+                ]
+            },
+            "credit_cards": {
+                "name": "Credit Cards",
+                "apiName": "credit_cards",
+                "views": [
+                    "detail",
+                    "form",
+                    "list"
+                ]
+            },
+            "employee_management_systems": {
+                "name": "Employee Management Systems",
+                "apiName": "employee_management_systems",
+                "views": [
+                    "detail",
+                    "form",
+                    "list"
+                ]
+            }
+        },
+        "roles": [
+            {
+                "name": "Full App Permissions"
+            }
+        ],
+        "teams": [
+            {
+                "name": "SOC Team"
+            }
+        ],
+        "playbooks": [
+            {
+                "name": "00 Bulk Alerts, Incidents, Indcators"
+            },
+            {
+                "name": "00 Create Bulk EMS ,Credit Cards"
+            }
+        ],
+        "dashboards": [
+            {
+                "name": "Test SVT for 761"
+            }
+        ],
+        "connectors": [
+            {
+                "name": "Code Snippet",
+                "apiName": "code-snippet"
+            }
+        ],
+        "recordSets": [
+            {
+                "name": "Alerts",
+                "apiName": "alerts",
+                "count": 1
+            },
+            {
+                "name": "Credit Cards",
+                "apiName": "credit_cards",
+                "count": 6
+            },
+            {
+                "name": "Employee Management Systems",
+                "apiName": "employee_management_systems",
+                "count": 14
+            }
+        ]
+    }
+}
